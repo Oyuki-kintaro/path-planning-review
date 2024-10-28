@@ -3,14 +3,14 @@
 This repository contains a collection of progressively complex maps designed for path-planning algorithm testing and development. Each map is structured to provide increasing challenges, from simple layouts to complex mazes, allowing for evaluation of various pathfinding techniques.
 
 **Map Key**
-    "S" - Starting point of the map.
-    "E" - Endpoint of the map.
-    "*" - Non-traversable space (obstacle or wall).
-    " " - Traversable space (open path).
+    "S" - Starting point of the map.  
+    "E" - Endpoint of the map.  
+    "*" - Non-traversable space (obstacle or wall).  
+    " " - Traversable space (open path).  
 
 ## Maps Overview
 
-The maps are saved as .csv files and can be read into both Python and C++ environments. Each map file is numbered according to its complexity level.
+The maps are saved as `.csv` files and can be read into both Python and C++ environments. Each map file is numbered according to its complexity level.
 
 **Map Descriptions**
 
@@ -36,8 +36,7 @@ The maps are saved as .csv files and can be read into both Python and C++ enviro
 
 ## Purpose of Use
 
-These maps are designed for the following purposes:
-
-    **Algorithm Testing:** Evaluate various path-planning algorithms, such as A*, Dijkstra, BFS, and DFS, by observing their effectiveness in different levels of complexity.
-    **Performance Analysis:** Measure the efficiency of algorithms by analyzing the computational time and memory usage required to find the optimal path in each map.
-    **Heuristic Development:** Fine-tune heuristics and optimization parameters to handle both simple and complex environments, potentially improving the algorithm's performance in real-world applications.
+These maps are designed for the following purposes:  
+**Algorithm Testing:** Evaluate various path-planning algorithms, such as A*, Dijkstra, BFS, and DFS, by observing their effectiveness in different levels of complexity.  
+**Performance Analysis:** Measure the efficiency of algorithms by analyzing the computational time and memory usage required to find the optimal path in each map.  
+**Heuristic Development:** Fine-tune heuristics and optimization parameters to handle both simple and complex environments, potentially improving the algorithm's performance in real-world applications.  
