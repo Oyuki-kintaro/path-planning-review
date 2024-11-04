@@ -1,94 +1,98 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <cstdlib>
-#include <sstream>
+#include <vector>
+#include "graph_based_algorithms/include/graph_based_utils.h"
 
-//function prototypes
-void Menu();
-int ReadCSVFile(std::string filename);
+// Function prototypes
+void DisplayMenu();
+void DisplayMap(const std::vector<std::vector<char>>& map);
+std::vector<std::vector<char>> LoadCSVFile(const std::string& filename);
 
-
-int main()
-{
-    int choice = 0;
+int main() {
+    int choice;
     std::string filename;
+    std::vector<std::vector<char>> map;
     
     do {
-
-        //print menu
-        Menu();
+        DisplayMenu();
         std::cin >> choice;
-
-        // get user input
-        switch (choice)
-        {
-        case 1:
-            filename = "../maps/map1.csv";
-            break;
-        case 2:
-            filename = "../maps/map2.csv";
-            break;
-        case 3:
-            filename = "../maps/map3.csv";
-            break;
-        case 4:
-            filename = "../maps/map4.csv";
-            break;
-        case 5:
-            filename = "../maps/map5.csv";
-            break;
-        case 6:
-            break;
-        default:
-            std::cout << "ERROR: Please enter a number 1 - 6" << std::endl;
-            break;
+        
+        if (std::cin.fail()) {
+            std::cin.clear(); // Clear the error flag on cin
+            std::cin.ignore(); // Discard invalid input
+            std::cerr << "\nERROR: Invalid input. Please enter a number between 1 and 6." << std::endl;
+            continue; // Restart the loop to display the menu again
         }
 
-        // take action based on input
-        if (choice != 6)
-        {
-            ReadCSVFile(filename);
+        // Validate user input and select corresponding file
+        switch (choice) {
+            case 1: filename = "../maps/map1.csv"; break;
+            case 2: filename = "../maps/map2.csv"; break;
+            case 3: filename = "../maps/map3.csv"; break;
+            case 4: filename = "../maps/map4.csv"; break;
+            case 5: filename = "../maps/map5.csv"; break;
+            case 6: 
+                std::cout << "Exiting..." << std::endl;
+                return EXIT_SUCCESS;
+            default:
+                std::cerr << "\nERROR: Please enter a number between 1 and 6." << std::endl;
+                continue;
         }
-               
-    } while (choice != 6);
-    std::cout << "Exiting..." << std::endl;
-    exit(EXIT_SUCCESS);
+
+        // Read and display the selected map
+        map = LoadCSVFile(filename);
+        std::cout << "\nStarting Map: \n";
+        DisplayMap(map);
+        bfs(map);
+        
+
+    } while (true);
 }
 
-void Menu()//Main Menu layout
-{
-    std::cout << "\n::::::::::Main Menu::::::::::\n" << std::endl;
-    std::cout << "Choose a map:" << std::endl;
-    std::cout << "1) Simple" << std::endl;
-    std::cout << "2) Moderate" << std::endl;
-    std::cout << "3) Intermediate" << std::endl;
-    std::cout << "4) Advanced" << std::endl;
-    std::cout << "5) Complex" << std::endl;
-    std::cout << "6) Exit Program\n" << std::endl;
-    std::cout << "Please select an option: ";
+// Displays the main menu
+void DisplayMenu() {
+    std::cout << "\n:::::::::: Main Menu ::::::::::\n"
+              << "Choose a map:\n"
+              << "\t1) Simple\n"
+              << "\t2) Moderate\n"
+              << "\t3) Intermediate\n"
+              << "\t4) Advanced\n"
+              << "\t5) Complex\n"
+              << "\t6) Exit Program\n"
+              << "\tPlease select an option: ";
 }
 
-int ReadCSVFile(std::string filename)
-{
+// Displays the map
+void DisplayMap(const std::vector<std::vector<char>>& map) {
+    for (const auto& row : map) {
+        for (char cell : row) {
+            std::cout << cell;
+        }
+        std::cout << '\n';
+    }
+}
+
+// Reads a CSV file and stores its contents in a 2D char vector
+std::vector<std::vector<char>> LoadCSVFile(const std::string& filename) {
     std::ifstream file(filename);
+    std::vector<std::vector<char>> grid;
 
     if (!file.is_open()) {
-        std::cerr << "Could not open the file!" << std::endl;
-        return 1; // Return with an error code
+        std::cerr << "ERROR: Could not open the file: " << filename << std::endl;
+        return {}; // Return an empty grid if file cannot be opened
     }
 
     std::string line;
-    while (std::getline(file, line)) { // Read each line from the file
-        std::stringstream ss(line); // Create a string stream from the line
-        std::string value;
-
-        while (std::getline(ss, value, ',')) { // Split the line by commas
-            std::cout << value << " "; // Output each value
+    while (std::getline(file, line)) {
+        std::vector<char> row;
+        for (char ch : line) {
+            if (ch != ',') { // Skip commas
+                row.push_back(ch);
+            }
         }
-        std::cout << std::endl; // New line for the next row
+        grid.push_back(row); // Add the row to the 2D array
     }
 
-    file.close(); // Close the file
-    return 0;
+    return grid;
 }
