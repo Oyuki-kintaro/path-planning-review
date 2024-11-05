@@ -17,7 +17,7 @@ python3 main.py
 ## C++
 ```
 cd C++
-g++ main.cpp -o main
+make
 ./main
 ```
 

@@ -14,7 +14,7 @@ def bfs(grid, start, end):
             - The grid with the path marked.
             - The number of steps in the shortest path, or -1 if the end is unreachable.
     """
-    # Define possible moves (up, down, left, right)
+    # Define possible moves (left, right, down, up)
     directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
     non_traversable = {'-', '|'}
     
@@ -39,7 +39,7 @@ def bfs(grid, start, end):
         if (x, y) == end:
             # Backtrack to mark the path
             current = end
-            while current is not None:
+            while current != start:
                 cx, cy = current
                 path_grid[cx][cy] = '*'  # Mark each cell along the path
                 current = came_from[current]

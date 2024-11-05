@@ -78,15 +78,16 @@ def display_menu():
 def main():
     """Main function to execute the map loading and pathfinding algorithm."""
     
-    file_path = display_menu()
-    map_2D_array, start_pos, end_pos = load_map_as_2D_arr(file_path)
-    
-    print("Starting Map:")
-    print_map(map_2D_array)
-    
-    final_map, result = breadth_first_search.bfs(map_2D_array, start_pos, end_pos)
-    print(f"\nResult: {result} steps, Final Map:")
-    print_map(final_map)
+    while True:
+        file_path = display_menu()
+        map_2D_array, start_pos, end_pos = load_map_as_2D_arr(file_path)
+        
+        print("Starting Map:")
+        print_map(map_2D_array)
+        
+        final_map, result = breadth_first_search.bfs(map_2D_array, start_pos, end_pos)
+        print(f"\nResult: {result} steps, Final Map:")
+        print_map(final_map)
 
 
 
