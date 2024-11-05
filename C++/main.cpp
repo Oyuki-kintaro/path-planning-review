@@ -1,8 +1,9 @@
+#include "graph_based_algorithms/include/graph_based_utils.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
-#include "graph_based_algorithms/include/graph_based_utils.h"
+
 
 // Function prototypes
 void DisplayMenu();
@@ -44,9 +45,12 @@ int main() {
         map = LoadCSVFile(filename);
         std::cout << "\nStarting Map: \n";
         DisplayMap(map);
-        bfs(map);
         
-
+        // Call the BFS algorithm
+        int dist = bfs(map);
+        std::cout << "\nResult: " << dist << " steps, Final Map:" << std::endl;
+        DisplayMap(map);
+        
     } while (true);
 }
 
