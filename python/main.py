@@ -1,7 +1,8 @@
 import csv
 import sys
 import os
-from graph_based_algorithms import breadth_first_search
+import time
+from graph_based_algorithms import breadth_first_search, depth_first_search
 
 # Constants
 MAPS_PATH = os.path.join(os.path.dirname(__file__), '../maps/')
@@ -75,19 +76,54 @@ def display_menu():
         except ValueError:
             print("ERROR: Please enter a valid number between 1 - 6.")
 
+def choose_algorithm():
+    """Prompt the user to choose a pathfinding algorithm ."""
+    
+    print("\nChoose a pathfinding algorithm:")
+    print("\t1: Breadth-First Search (BFS)")
+    print("\t2: Depth-First Search (DFS)")
+    print("\t3: Exit")
+    
+    while True:
+        try:
+            choice = int(input("Please select an option: "))
+            if choice == 1:
+                return "bfs"
+            elif choice == 2:
+                return "dfs"
+            elif choice == 3:
+                print("Exiting...")
+                sys.exit()
+            else:
+                print("ERROR: You must select either 1, 2 or 3.")
+        except ValueError:
+            print("ERROR: Please enter a valid number (1, 2 or 3).")
+
+
 def main():
     """Main function to execute the map loading and pathfinding algorithm."""
     
     while True:
         file_path = display_menu()
         map_2D_array, start_pos, end_pos = load_map_as_2D_arr(file_path)
+
+        # Ask the user to select a pathfinding algorithm
+        algorithm_choice = choose_algorithm()
         
-        print("Starting Map:")
+        start_time = time.perf_counter()
+        if algorithm_choice == "bfs":
+            final_map, result = breadth_first_search.bfs(map_2D_array, start_pos, end_pos)
+        elif algorithm_choice == "dfs":
+            final_map, result = depth_first_search.dfs(map_2D_array, start_pos, end_pos)
+        end_time = time.perf_counter()
+
+        # Print the results
+        print("\nStarting Map:")
         print_map(map_2D_array)
-        
-        final_map, result = breadth_first_search.bfs(map_2D_array, start_pos, end_pos)
-        print(f"\nResult: {result} steps, Final Map:")
+        print(f"Final Map:")
         print_map(final_map)
+        print(f"\nPathfinding algorithm: {algorithm_choice.upper()}\tTime taken: {end_time - start_time:.8f} seconds")
+        print(f"Result: {result} steps\n")  
 
 
 
