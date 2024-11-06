@@ -26,7 +26,6 @@ def dfs(grid, start, end):
 
     # Clone the grid to avoid modifying the original during path marking
     path_grid = [row[:] for row in grid]
-
     rows, cols = len(grid), len(grid[0])
 
     def dfs_recursive(x, y):
@@ -46,18 +45,13 @@ def dfs(grid, start, end):
     visited.add(start)
     if dfs_recursive(start[0], start[1]):
         # Backtrack to mark the path
+        dist = 0
         current = end
         while current != start:
             cx, cy = current
             path_grid[cx][cy] = '*'  # Mark each cell along the path
             current = came_from[current]
-        
-        # Calculate the distance (number of steps) from the start to the end
-        dist = 0
-        current = end
-        while current != start:
             dist += 1
-            current = came_from[current]
         
         return path_grid, dist
     

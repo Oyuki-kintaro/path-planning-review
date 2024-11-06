@@ -120,7 +120,7 @@ def main():
         # Print the results
         print("\nStarting Map:")
         print_map(map_2D_array)
-        print(f"Final Map:")
+        print(f"\nFinal Map:")
         print_map(final_map)
         print(f"\nPathfinding algorithm: {algorithm_choice.upper()}\tTime taken: {end_time - start_time:.8f} seconds")
         print(f"Result: {result} steps\n")  

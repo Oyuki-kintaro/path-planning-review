@@ -56,3 +56,46 @@ This structure makes BFS suitable for finding the shortest path in simple, unwei
 - **Negative Edge Weights**: BFS does not handle negative weights well; use Bellman-Ford instead.
 
 In summary, BFS is effective for finding the shortest path and exploring graphs level by level but can be limited by memory needs and deep structures. Consider these factors when choosing BFS for your task.
+
+# Depth-First Search (DFS) Overview
+
+Depth-First Search (DFS) is a traversal algorithm that explores a structure by going as deep as possible along each path before backtracking. Here's an overview of how it works, its benefits, limitations, and when to use or avoid it.
+
+## How DFS Works
+
+1. **Start at the root node** 
+2. **Mark the current node as visited.**
+3. **Recursively visit an unvisited adjacent node.**
+4. **If no unvisited adjacent nodes are available, backtrack.**
+5. **Repeat steps 2-4 until all reachable nodes are visited.**
+
+## Benefits
+
+- **Memory Efficiency:** DFS requires less memory compared to Breadth-First Search (BFS), as it only needs to store a stack of nodes on the current path.
+- **Solution Finding:** It can be faster at finding a solution if the solution is deep in the graph.
+- **Time Efficiency:** For graphs with many nodes or edges, DFS may be faster than BFS.
+- **Cycle Detection:** Useful for detecting cycles in graphs.
+- **Topological Sorting:** Effective for topological ordering of nodes in a directed acyclic graph.
+
+## Limitations
+
+- **Not Optimal for Shortest Paths:** DFS doesn't guarantee finding the shortest path in unweighted graphs.
+- **Incompleteness:** In infinite graphs, DFS may not find a solution that exists.
+- **Memory Usage in Worst Case:** In the worst case (e.g., a completely connected graph), DFS can consume as much memory as BFS.
+- **Potential for Getting Stuck:** Without proper constraints, DFS might go down very deep paths in large or infinite graphs.
+
+## When to Use DFS
+
+- **Maze Solving:** Excellent for solving mazes or puzzles with a single solution.
+- **Path Finding:** When you need to find any path (not necessarily the shortest) between two nodes.
+- **Tree/Graph Traversal:** For exploring all nodes in a graph, especially when the graph is deep rather than wide.
+- **Cycle Detection:** In scenarios where you need to detect cycles in a graph.
+- **Topological Sorting:** For ordering tasks with dependencies.
+
+## When Not to Use DFS
+
+- **Shortest Path Problems:** When finding the shortest path is crucial, BFS or Dijkstra's algorithm is preferable.
+- **Level-wise Exploration:** If you need to explore nodes level by level, BFS is more suitable.
+- **Very Large or Infinite Graphs:** Without proper depth limiting, DFS can get stuck in deep paths.
+- **Memory-Constrained Environments:** In cases where the recursion stack might overflow due to deep graphs.
+- **Weighted Graphs:** For finding optimal paths in weighted graphs, algorithms like Dijkstra's or A* are more appropriate.

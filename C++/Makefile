@@ -4,11 +4,13 @@
 CXX = g++
 
 # Compiler flags
-CXXFLAGS = -std=c++11 -I graph_based_algorithms/include
+CXXFLAGS = -std=c++17 -I graph_based_algorithms/include
 
 # Source files
 SOURCES = main.cpp \
-           graph_based_algorithms/src/breadth_first_search.cpp
+           graph_based_algorithms/src/pathfinding_utils.cpp \
+		   graph_based_algorithms/src/breadth_first_search.cpp \
+		   graph_based_algorithms/src/depth_first_search.cpp
 
 # Output executable
 TARGET = main
